@@ -16,10 +16,10 @@ const LoginPage=()=>{
         const form = event.target;
         context.singIn(form.login.value, form.password.value, fromPage);
 
-        if(context.validity===false){
-            form.login.setCustomValidity("Пароль или логин не верный");
-            return
-        }
+        // if(context.validity===false){
+        //     form.login.setCustomValidity("Пароль или логин не верный");
+        //     return
+        // }
     }
 
     
@@ -27,11 +27,11 @@ const LoginPage=()=>{
         <form  className='loginForm' onSubmit={(event)=>logIn(event)}>
             <h1>Login</h1>
             <div className='login'>
-                 <input name='login' type="login" placeholder='username' value='admin' required/>
+                 <input name='login' type="login" placeholder='username'  required/>
             </div>
 
             <div className='password'>
-                <input name='password' type="password"placeholder='password' value='admin' required/> 
+                <input name='password' type="password"placeholder='password'  required/> 
             </div>
 
             <button  type='submit'>Login</button>
