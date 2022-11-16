@@ -27,11 +27,11 @@ const LoginPage=()=>{
         <form  className='loginForm' onSubmit={(event)=>logIn(event)}>
             <h1>Login</h1>
             <div className='login'>
-                 <input name='login' type="login" placeholder='username' required/>
+                 <input name='login' type="login" placeholder='username' value='admin' required/>
             </div>
 
             <div className='password'>
-                <input name='password' type="password"placeholder='password' required/> 
+                <input name='password' type="password"placeholder='password' value='admin' required/> 
             </div>
 
             <button  type='submit'>Login</button>
