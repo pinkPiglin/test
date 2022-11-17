@@ -1,28 +1,29 @@
 import React from 'react';
-import {NavLink, Outlet} from 'react-router-dom';
-import  clases from'./layout.module.scss';
+import {Outlet} from 'react-router-dom';
+import  './layout.scss';
 import { useAuth } from '../hook/useAuth';
+import CustomLink from '../components/CustomLink';
 
 const Layout = ()=>{
    const user = useAuth();
    console.log(user)
     return(
       <>
-        <header className={clases.header}>
-            <NavLink to='/'>Home</NavLink>
-            <NavLink to='/posts'>Posts</NavLink>
-            <NavLink to='/about'>About</NavLink>
+        <header className='header'>
+            <CustomLink to='/'>Home</CustomLink>
+            <CustomLink to='posts'>Posts</CustomLink>
+            <CustomLink to='about'>About</CustomLink>
             {user.auth? 
-            (<div className={clases.singOut}>
+            (<div className='singOut'>
               <h3>{user.userName}</h3>
-              <button className={clases.buttonLogIn} onClick={user.singOut}>Sign Out</button>
+              <button className='buttonLogIn' onClick={user.singOut}>Sign Out</button>
             </div>
             
             )
             
             : (
-              <div className={clases.singIn}>
-                 <button><NavLink className={clases.buttonLogOut} to='login'>Sign In</NavLink></button>
+              <div className='singIn'>
+                 <button><CustomLink className='buttonLogOut' to='login'>Sign In</CustomLink></button>
               </div>
                
               )}

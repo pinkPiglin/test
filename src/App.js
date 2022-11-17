@@ -1,5 +1,5 @@
 import {React} from 'react';
-import {Routes, Route} from 'react-router-dom';
+import {RouterProvider,createBrowserRouter,createRoutesFromElements, Route} from 'react-router-dom';
 
 import './App.css';
 
@@ -12,25 +12,26 @@ import RequireAuth from './hoc/RequireAuth';
 import LoginPage from './pages/loginPage.js/loginPage';
 import { AuthProvider } from './hoc/AuthProvider';
 
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path='/' element={<Layout/>}>
+    <Route index element={<HomePage/>} />
+    <Route path='posts' element={
+      <RequireAuth>
+        <PostsPage/>
+      </RequireAuth>
+    } />
+    <Route path='about' element={<AboutPage/>} />
+    <Route path='posts/:id' element={<Post/>}/>
+    <Route path='login' element={<LoginPage/>}/>
+  </Route>
+)
+)
+
 const App=()=>  {
     return(
-      <>
       <AuthProvider>
-      <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route index element={<HomePage/>} />
-          <Route path='/posts' element={
-            <RequireAuth>
-              <PostsPage/>
-            </RequireAuth>
-            } />
-          <Route path='/about' element={<AboutPage/>} />
-          <Route path='/posts/:id' element={<Post/>}/>
-          <Route path='/login' element={<LoginPage/>}/>
-        </Route>
-      </Routes>
+        <RouterProvider router={router}/>
       </AuthProvider>
-    </>
     )
   }
  

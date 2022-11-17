@@ -1,7 +1,5 @@
 
 import { createContext,   useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 
 export const AuthContext = createContext(false);
 
@@ -22,10 +20,11 @@ export const AuthProvider =({children})=>{
     const [userName, setUser] = useState('');
     const [auth, setAuth] = useState(false);
     const [validity, setValidity] = useState(true);
-    const value = {userName, auth,validity, singIn, singOut}
-    const navigate = useNavigate();
 
-    function singIn(loginValue, passwordValue, fromPage){
+    const value = {userName, auth,validity, singIn, singOut};
+
+
+    function singIn(loginValue, passwordValue, cb){
         for(let i=0; i<users.length &&  i!== 'stop'; i++){
             let user = users[i];
             if(user.login===loginValue && user.password=== passwordValue){
@@ -33,7 +32,7 @@ export const AuthProvider =({children})=>{
                 setAuth(true);
                 setValidity(true);
                 i='stop';
-                navigate(fromPage, {replace:true});
+                cb();
             }
             else{
                 setValidity(false);
@@ -50,7 +49,6 @@ export const AuthProvider =({children})=>{
             {children}
         </AuthContext.Provider>
     )
-
 }
 
 
