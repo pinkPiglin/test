@@ -21,7 +21,7 @@ const LoginPage=()=>{
 
 
     return(
-        <form  className='loginForm' onSubmit={(event)=>logIn(event)}>
+        <form autoComplete='Off'  className='loginForm' onSubmit={(event)=>logIn(event)}>
             <h1>Login</h1>
             <div className='login'>
                 {!context.validity &&  hideErrorMessge ? (<span className='error'>Пароль или логин неверный!</span>):null}
