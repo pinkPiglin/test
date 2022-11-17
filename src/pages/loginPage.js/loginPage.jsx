@@ -2,32 +2,30 @@ import './loginPage.scss';
 import React from 'react';
 import { useLocation} from 'react-router-dom';
 import { useAuth } from '../../hook/useAuth';
+import { useState } from 'react';
 
 const LoginPage=()=>{
-    
+  
     const location = useLocation();
     const context = useAuth();
 
     const fromPage = location.state?.from?.pathname || '/'
     
     function logIn(event){
+        setHideErrorMessge(true);
         event.preventDefault();
-        
         const form = event.target;
         context.singIn(form.login.value, form.password.value, fromPage);
-
-        // if(context.validity===false){
-        //     form.login.setCustomValidity("Пароль или логин не верный");
-        //     return
-        // }
     }
+    const [hideErrorMessge, setHideErrorMessge]= useState(true);
 
-    
+
     return(
         <form  className='loginForm' onSubmit={(event)=>logIn(event)}>
             <h1>Login</h1>
             <div className='login'>
-                 <input name='login' type="login" placeholder='username'  required/>
+                {!context.validity &&  hideErrorMessge ? (<span className='error'>Пароль или логин неверный!</span>):null}
+                 <input name='login' type="login" placeholder='username'  onFocus={()=>{setHideErrorMessge(false)}} required/>
             </div>
 
             <div className='password'>

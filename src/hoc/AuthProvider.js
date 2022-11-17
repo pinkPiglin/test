@@ -21,24 +21,24 @@ export const AuthProvider =({children})=>{
 
     const [userName, setUser] = useState('');
     const [auth, setAuth] = useState(false);
-    const [validity, setValidity] = useState(true)
-    const value = {userName, auth, validity, singIn, singOut}
+    const [validity, setValidity] = useState(true);
+    const value = {userName, auth,validity, singIn, singOut}
     const navigate = useNavigate();
 
     function singIn(loginValue, passwordValue, fromPage){
-        debugger
-        users.forEach(user => {
+        for(let i=0; i<users.length &&  i!== 'stop'; i++){
+            let user = users[i];
             if(user.login===loginValue && user.password=== passwordValue){
                 setUser(user.name);
                 setAuth(true);
-                setValidity(true)
+                setValidity(true);
+                i='stop';
                 navigate(fromPage, {replace:true});
-            } 
-            else{
-                setValidity(false)
-                return
             }
-        });
+            else{
+                setValidity(false);
+            }
+        }
     }
 
     function singOut(){

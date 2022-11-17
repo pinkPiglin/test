@@ -16,7 +16,7 @@ const PostsPage=()=>{
     return(
         <ol className='posts'>
             {posts.map(post=> (
-                <li><Link key={post.id} to={`/posts/${post.id}`}>{post.title} </Link></li>)
+                <li key={post.id}><Link  to={`/posts/${post.id}`}>{post.title} </Link></li>)
             )}
         </ol>
     )
